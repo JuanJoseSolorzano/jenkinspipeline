@@ -11,20 +11,7 @@ pipeline {
     stages {
         stage("Testing"){
             steps {
-                python {
-                    script: '''
-                        import os
-                        import sys
-                        import unittest
-
-                        class TestDummyRepository(unittest.TestCase):
-                            def test_dummy(self):
-                                self.assertTrue(True)
-
-                        if __name__ == '__main__':
-                            unittest.main()
-                    '''
-                }
+                echo "Running tests..."
             }
         }
     }

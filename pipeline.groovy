@@ -20,7 +20,6 @@ pipeline {
                 stages {
                     stage('Main') {
                         steps {
-                            powershell "Running on ${AGENTS_LABEL}"
                             powershell "Write-Output 'this is an example of log using the ${AGENTS_LABEL}' >> log${AGENTS_LABEL}.txt"
                             // Add your pipeline steps here
                         }

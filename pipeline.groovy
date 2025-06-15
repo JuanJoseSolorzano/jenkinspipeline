@@ -25,11 +25,13 @@ pipeline {
                         } 
                     }
                     stage("Cloning a repository"){
-                        powershell """
-                            Write-Output 'Cloning the repository ${REPOSITORY_URL} using the agent ${AGENTS_LABEL}' >> log.txt
-                            Write-Output ${SEPARATOR} >> log.txt
-                            git clone ${REPOSITORY_URL} >> log.txt
-                        """
+                        steps {
+                            powershell """
+                                Write-Output 'Cloning the repository ${REPOSITORY_URL} using the agent ${AGENTS_LABEL}' >> log.txt
+                                Write-Output ${SEPARATOR} >> log.txt
+                                git clone ${REPOSITORY_URL} >> log.txt
+                            """
+                        }
                     }
                 }
             }

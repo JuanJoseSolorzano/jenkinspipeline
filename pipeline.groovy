@@ -14,8 +14,14 @@ pipeline {
                 axes {
                     axis {
                         name 'Agents_Labels'
-                        valus 'WindowsHostMachine','WindowsHostMachine1','WindowsHostMachine2'
+                        values 'WindowsHostMachine','WindowsHostMachine1','WindowsHostMachine2'
                     }
+                }
+            }
+            agent {label "${Agents_Labels}"}
+            stages{
+                stage("Main"){
+                    powershell 'Write-Host "Hello from ${Agents_Labels}"'
                 }
             }
         }

@@ -7,21 +7,21 @@
 // The pipeline block defines the Jenkins Job configuration
 
 pipeline {
-    agent none
+    agent none // No default agent to be able to use matrix agents and execute the same job on multiple agents
     stages {
-        stage('Run on Multiple Agents') {
-            matrix {
-                axes {
-                    axis {
-                        name 'AGENT_LABEL'
+        stage('Running the same Job') { // One stage defined as a main stage, inside this stage we will run the same job.
+            matrix { // Matrix block is needed to run the same job using different agents.
+                axes { axis {
+                        name 'AGENTS_LABEL' // Define an axis for the agent label
                         values 'WindowsHostMachine', 'WindowsHostMachine1', 'WindowsHostMachine2'
                     }
                 }
-                agent { label "${AGENT_LABEL}" }
+                agent { label "${AGENTS_LABEL}" }
                 stages {
                     stage('Main') {
                         steps {
-                            echo "Running on ${AGENT_LABEL}"
+                            powershell "Running on ${AGENTS_LABEL}"
+                            powershell "Write-Output 'this is an example of log using the ${AGENTS_LABEL}' >> log${AGENTS_LABEL}.txt"
                             // Add your pipeline steps here
                         }
                     }

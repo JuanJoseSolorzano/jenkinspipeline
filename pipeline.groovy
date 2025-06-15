@@ -7,7 +7,7 @@
 // The pipeline block defines the Jenkins Job configuration
 
 pipeline {
-    agents {
+    agent {
         label 'WindowsHostMachine'
     }
     stages {

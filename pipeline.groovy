@@ -7,11 +7,13 @@
 // The pipeline block defines the Jenkins Job configuration
 
 pipeline {
-    agent any
+    agents {
+        label 'WindowsHostMachine'
+    }
     stages {
         stage("Testing"){
             steps {
-                echo "Running tests..."
+                powershell 'Write-Host "This is a test stage running on a Windows host machine."'
             }
         }
     }

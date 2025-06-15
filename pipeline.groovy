@@ -5,8 +5,8 @@
 // ==========================================================
 
 // The pipeline block defines the Jenkins Job configuration
-//def REPOSITORY_URL = 'https://github.com/JuanJoseSolorzano/Bash_Scripting.git'
-//def SEPARATOR = '$("="*75)'
+def REPOSITORY_URL = 'https://github.com/JuanJoseSolorzano/Bash_Scripting.git'
+def SEPARATOR = '$("="*75)'
 pipeline {
     agent none // No default agent to be able to use matrix agents and execute the same job on multiple agents
     stages {
@@ -22,11 +22,13 @@ pipeline {
                     stage('Main') {
                         steps {
                             powershell "Write-Output 'this is an example of log using the \"${AGENTS_LABEL}\"' >> log.txt"
-                        }
+                        } 
                     }
                     stage("Cloning a repository"){
                         powershell """
-                            git clone https://github.com/JuanJoseSolorzano/Bash_Scripting.git >> log.txt
+                            Write-Output 'Cloning the repository ${REPOSITORY_URL} using the agent ${AGENTS_LABEL}' >> log.txt
+                            Write-Output ${SEPARATOR} >> log.txt
+                            git clone ${REPOSITORY_URL} >> log.txt
                         """
                     }
                 }

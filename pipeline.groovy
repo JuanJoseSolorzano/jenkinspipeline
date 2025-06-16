@@ -28,7 +28,6 @@ pipeline {
       steps {
         echo 'Building...'
         // Add your build command; example:
-        sh './gradlew build'
       }
     }
 
@@ -36,7 +35,6 @@ pipeline {
       steps {
         echo 'Testing...'
         // Add your test command; example:
-        sh './gradlew test'
       }
     }
 

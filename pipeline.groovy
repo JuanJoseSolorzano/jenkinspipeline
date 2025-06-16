@@ -3,7 +3,7 @@
 // Author: Juan Jose Solorzano
 // Date: 12/10/2024
 // ==========================================================
-
+//
 // The pipeline block defines the Jenkins Job configuration
 def REPOSITORY_URL = 'https://github.com/JuanJoseSolorzano/Bash_Scripting.git'
 def SEPARATOR = '$("="*75)'

@@ -5,20 +5,59 @@
 // ==========================================================
 //
 // The pipeline block defines the Jenkins Job configuration
-def REPOSITORY_URL = 'https://github.com/JuanJoseSolorzano/Bash_Scripting.git'
-def SEPARATOR = '$("="*75)'
 pipeline {
-    agent {
-        label 'AgentNumberOne'
-    }
-    triggers {
+  agent any
+
+  triggers {
+    // Fires only on GitHub push events
     githubPush()
   }
-  stages{
-    stage("Cloning"){
-        steps{
-            echo "Cloning the repository from ${REPOSITORY_URL}"
-        }
+
+  stages {
+    stage('Checkout') {
+      steps {
+        // Replace URL and credentialsId with your own
+        git(
+          url: 'https://github.com/JuanJoseSolorzano/Bash_Scripting.git',
+          branch: 'master'
+        )
+      }
+    }
+
+    stage('Build') {
+      steps {
+        echo 'Building...'
+        // Add your build command; example:
+        sh './gradlew build'
+      }
+    }
+
+    stage('Test') {
+      steps {
+        echo 'Testing...'
+        // Add your test command; example:
+        sh './gradlew test'
+      }
+    }
+
+    stage('Deploy') {
+      when {
+        branch 'master'
+      }
+      steps {
+        echo 'Deploying build from master...'
+        // Example deploy script:
+        sh './deploy.sh'
+      }
+    }
+  }
+
+  post {
+    success {
+      echo '✅ Pipeline completed successfully!'
+    }
+    failure {
+      echo '❌ Pipeline failed. Please review the logs.'
     }
   }
 }

@@ -47,17 +47,16 @@ pipeline {
       steps {
         echo 'Deploying build from master...'
         // Example deploy script:
-        sh './deploy.sh'
       }
     }
   }
 
   post {
     success {
-      echo '✅ Pipeline completed successfully!'
+      echo 'Pipeline completed successfully!'
     }
     failure {
-      echo '❌ Pipeline failed. Please review the logs.'
+      echo 'Pipeline failed. Please review the logs.'
     }
   }
 }
